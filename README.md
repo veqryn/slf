@@ -5,6 +5,8 @@
 
 Just the interface and the factory as inspired by SLF4J.
 
+A matching implementation will be shortly available under [[http://github.com/ventu-io/log]].
+
 
 [docs]: https://godoc.org/github.com/ventu-io/slf
 [docsimage]: http://img.shields.io/badge/godoc-reference-blue.svg?style=flat
