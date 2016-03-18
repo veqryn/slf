@@ -5,7 +5,7 @@
 
 Just the interface and the factory as inspired by SLF4J.
 
-A matching implementation will be shortly available under [[http://github.com/ventu-io/log]].
+A matching implementation will be shortly available under http://github.com/ventu-io/slog.
 
 
 [docs]: https://godoc.org/github.com/ventu-io/slf
