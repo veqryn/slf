@@ -4,7 +4,6 @@
 package slf_test
 
 import (
-	"fmt"
 	"github.com/ventu-io/slf"
 	"testing"
 )
@@ -14,42 +13,28 @@ type factory struct {
 	context string
 }
 
-func (log *factory) WithField(key string, value interface{}) slf.StructuredLogger {
-	if key == "context" {
-		log.context = fmt.Sprint(value)
-	}
+func (log *factory) WithContext(context string) slf.StructuredLogger {
+	log.context = context
 	return log
 }
 
 func TestFactory_define_success(t *testing.T) {
-	slf.Define(&slf.Noop{})
-	if slf.IsDefined() {
+	slf.Set(&slf.Noop{})
+	if slf.IsSet() {
 		t.Error("expected undefined")
 	}
-	slf.Define(&factory{&slf.Noop{}, ""})
-	if !slf.IsDefined() {
+	slf.Set(&factory{&slf.Noop{}, ""})
+	if !slf.IsSet() {
 		t.Error("expected defined")
 	}
-	slf.Define(&slf.Noop{})
-	if slf.IsDefined() {
+	slf.Set(&slf.Noop{})
+	if slf.IsSet() {
 		t.Error("expected undefined")
-	}
-}
-
-func TestFactory_get_success(t *testing.T) {
-	logger := slf.Get()
-	if _, ok := logger.(*slf.Noop); !ok {
-		t.Error("expected Noop")
-	}
-	slf.Define(&factory{&slf.Noop{}, ""})
-	logger = slf.Get()
-	if _, ok := logger.(*factory); !ok {
-		t.Error("expected factory")
 	}
 }
 
 func TestFactory_withContext_success(t *testing.T) {
-	slf.Define(&factory{&slf.Noop{}, ""})
+	slf.Set(&factory{&slf.Noop{}, ""})
 	logger := slf.WithContext("test")
 	f, ok := logger.(*factory)
 	if !ok {

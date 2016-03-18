@@ -11,8 +11,13 @@ import (
 // Noop implements the Logger interface with no operation (except for panic in Panic and Panicf).
 type Noop struct{}
 
+// WithContext implements the Logger interface.
+func (log *Noop) WithContext(string) StructuredLogger {
+	return log
+}
+
 // WithCaller implements the Logger interface.
-func (log *Noop) WithCaller(bool) StructuredLogger {
+func (log *Noop) WithCaller() StructuredLogger {
 	return log
 }
 

@@ -8,20 +8,24 @@ import (
 	"testing"
 )
 
-func TestChaining_uotoerror_success(t *testing.T) {
-	log := slf.Get()
+func TestChaining_withContext_success(t *testing.T) {
+	log := slf.WithContext("context")
 	log.Log(slf.LevelInfo, "").Trace(nil)
 	log.Logf(slf.LevelInfo, "%v", "").Trace(nil)
-	log.WithCaller(true).Debug("").Trace(nil)
 	log.WithError(nil).Debugf("%v", "").Trace(nil)
 	log.WithField("a", "b").Info("").Trace(nil)
-	log.WithCaller(true).WithField("a", "b").Debug("").Trace(nil)
 	log.WithFields(slf.Fields{"a": "b"}).Error("").Trace(nil)
 	log.WithFields(slf.Fields{"a": "b"}).WithError(nil).Infof("%v", "").Trace(nil)
 	log.WithError(nil).Errorf("%v", "").Trace(nil)
 	log.WithField("a", "b").WithField("c", "d").Info("").Trace(nil)
-	log.WithCaller(true).WithError(nil).Warn("").Trace(nil)
-	log.WithCaller(true).WithError(nil).Warnf("%v", "").Trace(nil)
+}
+
+func TestChaining_withCaller_success(t *testing.T) {
+	log := slf.WithCaller()
+	log.Debug("")
+	log.WithField("a", "b").Debug("").Trace(nil)
+	log.WithError(nil).Warn("").Trace(nil)
+	log.WithError(nil).Warnf("%v", "").Trace(nil)
 }
 
 func TestChaning_panic_success(t *testing.T) {
@@ -30,7 +34,7 @@ func TestChaning_panic_success(t *testing.T) {
 			t.Error("panic expecte")
 		}
 	}()
-	slf.Get().Panic("")
+	slf.WithCaller().Panic("")
 }
 
 func TestChaning_panicf_success(t *testing.T) {
@@ -39,5 +43,5 @@ func TestChaning_panicf_success(t *testing.T) {
 			t.Error("panic expecte")
 		}
 	}()
-	slf.Get().WithField("a", "b").Panicf("%v", "")
+	slf.WithCaller().WithField("a", "b").Panicf("%v", "")
 }
