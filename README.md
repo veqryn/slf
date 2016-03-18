@@ -1,7 +1,9 @@
 
 [![Build status][buildimage]][build] [![Coverage][codecovimage]][codecov] [![GoReportCard][cardimage]][card] [![API documentation][docsimage]][docs]
 
-# Structured log interface for Go
+# Structured Logging Facade for Go
+
+Just the interface and the factory as inspired by SLF4J.
 
 
 [docs]: https://godoc.org/github.com/ventu-io/go-slf
