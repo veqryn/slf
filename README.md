@@ -6,16 +6,16 @@
 Just the interface and the factory as inspired by SLF4J.
 
 
-[docs]: https://godoc.org/github.com/ventu-io/go-slf
+[docs]: https://godoc.org/github.com/ventu-io/slf
 [docsimage]: http://img.shields.io/badge/godoc-reference-blue.svg?style=flat
 
-[build]: https://travis-ci.org/ventu-io/go-slf
-[buildimage]: https://travis-ci.org/ventu-io/go-slf.svg?branch=master
+[build]: https://travis-ci.org/ventu-io/slf
+[buildimage]: https://travis-ci.org/ventu-io/slf.svg?branch=master
 
-[codecov]: https://codecov.io/github/ventu-io/go-slf?branch=master
-[codecovimage]: https://codecov.io/github/ventu-io/go-slf/coverage.svg?branch=master
+[codecov]: https://codecov.io/github/ventu-io/slf?branch=master
+[codecovimage]: https://codecov.io/github/ventu-io/slf/coverage.svg?branch=master
 
-[card]: http://goreportcard.com/report/ventu-io/go-slf
-[cardimage]: https://goreportcard.com/badge/github.com/ventu-io/go-slf
+[card]: http://goreportcard.com/report/ventu-io/slf
+[cardimage]: https://goreportcard.com/badge/github.com/ventu-io/slf
 
-[license]: https://github.com/ventu-io/go-slf/blob/master/LICENSE
+[license]: https://github.com/ventu-io/slf/blob/master/LICENSE
