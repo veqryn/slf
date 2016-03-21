@@ -37,9 +37,6 @@ type BasicLogger interface {
 	// Log logs the string with the given level.
 	Log(Level, string) Tracer
 
-	// Logf formats and logs the string with the given level.
-	Logf(Level, string, ...interface{}) Tracer
-
 	// Debug logs the string with the corresponding level.
 	Debug(string) Tracer
 

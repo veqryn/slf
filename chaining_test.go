@@ -11,7 +11,6 @@ import (
 func TestChaining_withContext_success(t *testing.T) {
 	log := slf.WithContext("context")
 	log.Log(slf.LevelInfo, "").Trace(nil)
-	log.Logf(slf.LevelInfo, "%v", "").Trace(nil)
 	log.WithError(nil).Debugf("%v", "").Trace(nil)
 	log.WithField("a", "b").Info("").Trace(nil)
 	log.WithFields(slf.Fields{"a": "b"}).Error("").Trace(nil)

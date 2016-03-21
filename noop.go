@@ -36,11 +36,6 @@ func (log *Noop) Log(Level, string) Tracer {
 	return log
 }
 
-// Logf implements the Logger interface.
-func (log *Noop) Logf(Level, string, ...interface{}) Tracer {
-	return log
-}
-
 // Debug implements the Logger interface.
 func (log *Noop) Debug(string) Tracer {
 	return log
