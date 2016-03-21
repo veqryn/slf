@@ -13,13 +13,8 @@ package slf
 
 // Logger represents a logger API for structured logging.
 type Logger interface {
-	StructuredLogger
-
 	// WithContext returns a logger with context set to a string.
 	WithContext(string) StructuredLogger
-
-	// WithCaller returns a logger with context set to the caller.
-	WithCaller() StructuredLogger
 }
 
 // StructuredLogger represents a logger that can define a structured context by adding data fields..

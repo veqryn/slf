@@ -18,10 +18,6 @@ func TestChaining_withContext_success(t *testing.T) {
 	log.WithFields(slf.Fields{"a": "b"}).WithError(nil).Infof("%v", "").Trace(nil)
 	log.WithError(nil).Errorf("%v", "").Trace(nil)
 	log.WithField("a", "b").WithField("c", "d").Info("").Trace(nil)
-}
-
-func TestChaining_withCaller_success(t *testing.T) {
-	log := slf.WithCaller()
 	log.Debug("")
 	log.WithField("a", "b").Debug("").Trace(nil)
 	log.WithError(nil).Warn("").Trace(nil)
@@ -34,7 +30,7 @@ func TestChaning_panic_success(t *testing.T) {
 			t.Error("panic expecte")
 		}
 	}()
-	slf.WithCaller().Panic("")
+	slf.WithContext("context").Panic("")
 }
 
 func TestChaning_panicf_success(t *testing.T) {
@@ -43,5 +39,5 @@ func TestChaning_panicf_success(t *testing.T) {
 			t.Error("panic expecte")
 		}
 	}()
-	slf.WithCaller().WithField("a", "b").Panicf("%v", "")
+	slf.WithContext("context").WithField("a", "b").Panicf("%v", "")
 }

@@ -23,8 +23,3 @@ func Set(log Logger) {
 func WithContext(context string) StructuredLogger {
 	return root.WithContext(context)
 }
-
-// WithCaller returns a logger with context set to the caller.
-func WithCaller() StructuredLogger {
-	return root.WithCaller()
-}
