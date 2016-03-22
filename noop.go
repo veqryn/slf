@@ -26,6 +26,11 @@ func (log *Noop) WithFields(Fields) StructuredLogger {
 	return log
 }
 
+// WithCaller implements the Logger interface.
+func (log *Noop) WithCaller(CallerInfo) StructuredLogger {
+	return log
+}
+
 // WithError implements the Logger interface.
 func (log *Noop) WithError(error) BasicLogger {
 	return log

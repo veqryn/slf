@@ -11,6 +11,20 @@
 // github.com/ventu-io/slog.
 package slf
 
+// CallerInfo defines an enumeration for the types of caller information to output, short or long.
+type CallerInfo int
+
+const (
+	// CallerNone defines no caller info in the log.
+	CallerNone CallerInfo = iota
+
+	// CallerShort defines short caller info in the log (base name).
+	CallerShort
+
+	// CallerLong defines long caller info in the log (full path).
+	CallerLong
+)
+
 // Logger represents a logger API for structured logging.
 type Logger interface {
 	// WithContext returns a logger with context set to a string.
@@ -21,11 +35,14 @@ type Logger interface {
 type StructuredLogger interface {
 	BasicLogger
 
-	// WithField adds a named data field to the loger context.
+	// WithField adds a named data field to the logger context.
 	WithField(string, interface{}) StructuredLogger
 
 	// WithFields adds a number of named fields to the logger context.
 	WithFields(Fields) StructuredLogger
+
+	// WithCaller adds caller information to the data fields.
+	WithCaller(CallerInfo) StructuredLogger
 
 	// WithError adds an error record to the logger context (only one permitted).
 	WithError(error) BasicLogger

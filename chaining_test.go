@@ -21,6 +21,7 @@ func TestChaining_withContext_success(t *testing.T) {
 	log.WithField("a", "b").Debug("").Trace(nil)
 	log.WithError(nil).Warn("").Trace(nil)
 	log.WithError(nil).Warnf("%v", "").Trace(nil)
+	log.WithCaller(slf.CallerShort).WithCaller(slf.CallerLong).WithCaller(slf.CallerNone).Error("test")
 }
 
 func TestChaning_panic_success(t *testing.T) {
