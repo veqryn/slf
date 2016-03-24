@@ -20,24 +20,38 @@ const (
 	LevelPanic
 )
 
-// MarshalJSON provides a JSON representation of the log level.
-func (l Level) MarshalJSON() ([]byte, error) {
-	var s string
+func (l Level) String() string {
+	s, err := l.string()
+	if err == nil {
+		return s
+	}
+	return "<NA>"
+}
+
+func (l Level) string() (string, error) {
 	switch l {
 	case LevelDebug:
-		s = "debug"
+		return "DEBUG", nil
 	case LevelInfo:
-		s = "info"
+		return "INFO", nil
 	case LevelWarn:
-		s = "warn"
+		return "WARN", nil
 	case LevelError:
-		s = "error"
+		return "ERROR", nil
 	case LevelPanic:
-		s = "panic"
+		return "PANIC", nil
 	default:
-		return nil, fmt.Errorf("slf: unknown level %v", l)
+		return "", fmt.Errorf("slf: unknown level %d", int(l))
 	}
-	return []byte(`"` + s + `"`), nil
+}
+
+// MarshalJSON provides a JSON representation of the log level.
+func (l Level) MarshalJSON() ([]byte, error) {
+	s, err := l.string()
+	if err == nil {
+		return []byte(`"` + s + `"`), nil
+	}
+	return nil, err
 }
 
 // UnmarshalJSON parses the JSON representation of the log level into a Level object.

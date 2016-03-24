@@ -18,23 +18,23 @@ func TestLevel_marshal_success(t *testing.T) {
 	if err != nil {
 		t.Errorf("unexpected error, %v", err)
 	}
-	if string(res) != `{"level":"debug"}` {
+	if string(res) != `{"level":"DEBUG"}` {
 		t.Errorf("unexpected result, %v", string(res))
 	}
 	res, _ = json.Marshal(test{Level: slf.LevelInfo})
-	if string(res) != `{"level":"info"}` {
+	if string(res) != `{"level":"INFO"}` {
 		t.Errorf("unexpected result, %v", string(res))
 	}
 	res, _ = json.Marshal(test{Level: slf.LevelWarn})
-	if string(res) != `{"level":"warn"}` {
+	if string(res) != `{"level":"WARN"}` {
 		t.Errorf("unexpected result, %v", string(res))
 	}
 	res, _ = json.Marshal(test{Level: slf.LevelError})
-	if string(res) != `{"level":"error"}` {
+	if string(res) != `{"level":"ERROR"}` {
 		t.Errorf("unexpected result, %v", string(res))
 	}
 	res, _ = json.Marshal(test{Level: slf.LevelPanic})
-	if string(res) != `{"level":"panic"}` {
+	if string(res) != `{"level":"PANIC"}` {
 		t.Errorf("unexpected result, %v", string(res))
 	}
 }
@@ -42,7 +42,7 @@ func TestLevel_marshal_success(t *testing.T) {
 func TestLevel_marshal_withWrongLevel_error(t *testing.T) {
 	_, err := json.Marshal(test{Level: slf.Level(33)})
 	if err == nil || err.Error() != "json: error calling MarshalJSON for type slf.Level: slf: unknown level 33" {
-		t.Errorf("expected an error, %v", err)
+		t.Error("expected an error")
 	}
 }
 
@@ -80,5 +80,13 @@ func TestLevel_unmarshal_withWrongLevel_error(t *testing.T) {
 	if err == nil || err.Error() != `slf: unknown level "foo"` {
 		t.Errorf("expected an error, %v", err)
 	}
+}
 
+func TestLevel_String_success(t *testing.T) {
+	if slf.LevelError.String() != "ERROR" {
+		t.Errorf("expected ERROR, %v", slf.LevelError.String())
+	}
+	if slf.Level(30).String() != "<NA>" {
+		t.Errorf("expected <NA>, %v", slf.Level(30).String())
+	}
 }
