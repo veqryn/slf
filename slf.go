@@ -25,15 +25,15 @@ const (
 	CallerLong
 )
 
-// Logger represents a logger API for structured logging.
-type Logger interface {
+// LogFactory represents a logger API for structured logging.
+type LogFactory interface {
 	// WithContext returns a logger with context set to a string.
 	WithContext(string) StructuredLogger
 }
 
 // StructuredLogger represents a logger that can define a structured context by adding data fields..
 type StructuredLogger interface {
-	BasicLogger
+	Logger
 
 	// WithField adds a named data field to the logger context.
 	WithField(string, interface{}) StructuredLogger
@@ -45,11 +45,11 @@ type StructuredLogger interface {
 	WithCaller(CallerInfo) StructuredLogger
 
 	// WithError adds an error record to the logger context (only one permitted).
-	WithError(error) BasicLogger
+	WithError(error) Logger
 }
 
-// BasicLogger represents a generic leveled log interface.
-type BasicLogger interface {
+// Logger represents a generic leveled log interface.
+type Logger interface {
 
 	// Log logs the string with the given level.
 	Log(Level, string) Tracer

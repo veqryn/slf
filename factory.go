@@ -3,23 +3,24 @@
 
 package slf
 
-var root Logger = &Noop{}
+var factory LogFactory = &Noop{}
 
-// IsSet checks if the root logger has been defined. Default is false due to the Noop logger
-// (No Operation).
+// IsSet checks if the global log factory is set and not Noop.
 func IsSet() bool {
-	if _, ok := root.(*Noop); !ok {
+	if _, ok := factory.(*Noop); !ok {
 		return true
 	}
 	return false
 }
 
-// Set defines the root logger.
-func Set(log Logger) {
-	root = log
+// Set sets the global log factory.
+func Set(log LogFactory) {
+	if log != nil {
+		factory = log
+	}
 }
 
-// WithContext returns a logger with context set to a string.
+// WithContext returns a logger with context set to the given string.
 func WithContext(context string) StructuredLogger {
-	return root.WithContext(context)
+	return factory.WithContext(context)
 }

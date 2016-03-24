@@ -8,7 +8,8 @@ import (
 	"fmt"
 )
 
-// Noop implements the Logger interface with no operation (except for panic in Panic and Panicf).
+// Noop implements the LogFactory, StructuredLogger and Logger interfaces with void operations
+// (except for panic in Panic and Panicf).
 type Noop struct{}
 
 // WithContext implements the Logger interface.
@@ -32,7 +33,7 @@ func (log *Noop) WithCaller(CallerInfo) StructuredLogger {
 }
 
 // WithError implements the Logger interface.
-func (log *Noop) WithError(error) BasicLogger {
+func (log *Noop) WithError(error) Logger {
 	return log
 }
 
