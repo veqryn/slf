@@ -118,25 +118,6 @@ Given the above setup the log output of the application can look like this:
 * for the JSON logger:
 
         {
-          "timestamp": "2016-03-26T17:41:14.5492",
-          "level": "INFO",
-          "message": "Started worker.",
-          "error": null,
-          "fields": {
-            "context": "probe.shared.proc.TaskProcessor",
-            "worker": 17
-          }
-        }
-
-* for the basic text logger (with coloured INFO if output to a terminal):
-
-        17:41:14.549 [INFO] probe.shared.proc.TaskProcessor: Started worker. worker=17
-    
-A log entry with an error message could look like this:
-
-* for the JSON logger:
-
-        {
           "timestamp": "2016-03-26T17:41:14.5517",
           "level": "WARN",
           "message": "Error while subscribing. Retrying in 30s",
