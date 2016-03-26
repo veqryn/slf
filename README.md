@@ -37,7 +37,7 @@ One should be careful not to initialise any context logger, that is the one obta
 * define a package-level function to retrieve a context logger, e.g. 
 
         func logger() slf.StructuredLogger {
-            return slf.WithContext("app.package.")
+            return slf.WithContext("app.package")
         }
        
         func HandleRequest(req Request) (err error) {
