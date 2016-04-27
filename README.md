@@ -21,7 +21,7 @@ The API is fairly confined and straightforward, so it is worth looking into the 
 * context-specific logger instances, e.g. those for a package, a struct or a module, are retrieved from the factory using `slf.WithContext(contextDef)`. The interface prescribes at least one structured field, `context`;
 * these can then be used with fields to define the structure of log entries or even without any further fields, just like a plain vanilla logger. Arbitrary fields are accepted via `WithField("key", value)` or `WithFields(slf.Fields{"key": value})` and the predefined ones via `WithError(err)` or `WithCaller(slf.CallerShort)`;
 * leveled log entries can be generated with or without a formatter, `logger.Debugf("%v", "message")` and `logger.Info("message")`;
-* the interface defines 5 serializable log levels `DEBUG`, `INFO`, `WARN`, `ERROR`, `PANIC` (`TRACE` and `FATAL` are explicitly excluded and the discussion about their necessity is rather a philosophical one);
+* the interface defines 5 serializable log levels `DEBUG`, `INFO`, `WARN`, `ERROR`, `PANIC`, `FATAL` (`TRACE` is explicitly excluded);
 * finally, each log entry can be followed by a `Trace` method, which is supposed to log execution time counting from the last log entry by the same logger using the same log level as the last log entry. Using it with `defer` provides a clean mechanism to trace the execution times of methods in one line.
 
 The interface defines no structure of the actual log entry, nor the mechanism of how the log levels are set to the contexts (if at all), nor log entry handler interface, nor the actual log entry handlers. All these entities are what libraries using the logger do not care about and are only of concern for the application putting the libraries together. Therefore, all of these are deferred to the actual implementation used in the application (and are for example defined in the reference [slog] implementation).
@@ -30,7 +30,7 @@ The interface defines no structure of the actual log entry, nor the mechanism of
 
 ### Using within a library
 
-As mentioned above, there is no need to bind any implementation of SLF into a library. The `slf` module provides a `Noop` implementation by default, that is the one with No-Operation, which will make sure your library does not panic on missing logging implementation. The factory methods and all the logging routines will work as is, yet no output will be generated. One exception is the `Panic` command, which will panic even though no log output will be generated.
+As mentioned above, there is no need to bind any implementation of SLF into a library. The `slf` module provides a `Noop` implementation by default, that is the one with No-Operation, which will make sure your library does not panic on missing logging implementation. The factory methods and all the logging routines will work as is, yet no output will be generated. Two exceptions are the `Panic` command, which will panic even though no log output will be generated, and `Fatal`, which will call `os.Exit(1)` even though no log output will be generated.
 
 One should be careful not to initialise any context logger, that is the one obtained with `slf.WithContext`, in the `init` or into a package-level variable directly, as this will return an instance of the `Noop` implementation before the factory could be reset to use an actual logging implementation in the main application. However, the following three approaches are all valid:
 

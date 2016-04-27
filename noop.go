@@ -6,10 +6,11 @@ package slf
 import (
 	"errors"
 	"fmt"
+	"os"
 )
 
 // Noop implements the LogFactory, StructuredLogger and Logger interfaces with void operations
-// (except for panic in Panic and Panicf).
+// (except for panic in Panic and Panicf, and os.Exit(1) in Fatal and Fatalf).
 type Noop struct{}
 
 // WithContext implements the Logger interface.
@@ -90,6 +91,16 @@ func (*Noop) Panic(message string) {
 // Panicf implements the Logger interface.
 func (*Noop) Panicf(message string, args ...interface{}) {
 	panic(fmt.Errorf(message, args...))
+}
+
+// Fatal implements the Logger interface.
+func (*Noop) Fatal(message string) {
+	os.Exit(1)
+}
+
+// Fatalf implements the Logger interface.
+func (*Noop) Fatalf(message string, args ...interface{}) {
+	os.Exit(1)
 }
 
 // Trace implements the Logger interface.
