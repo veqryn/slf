@@ -18,6 +18,7 @@ const (
 	LevelWarn
 	LevelError
 	LevelPanic
+	LevelFatal
 )
 
 func (l Level) String() string {
@@ -40,6 +41,8 @@ func (l Level) string() (string, error) {
 		return "ERROR", nil
 	case LevelPanic:
 		return "PANIC", nil
+	case LevelFatal:
+		return "FATAL", nil
 	default:
 		return "", fmt.Errorf("slf: unknown level %d", int(l))
 	}
@@ -78,6 +81,10 @@ func (l *Level) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "panic":
 		*l = LevelPanic
+	case `"fatal"`:
+		fallthrough
+	case "fatal":
+		*l = LevelFatal
 	default:
 		return fmt.Errorf("slf: unknown level %v", s)
 	}
