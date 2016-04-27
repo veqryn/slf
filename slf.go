@@ -50,7 +50,6 @@ type StructuredLogger interface {
 
 // Logger represents a generic leveled log interface.
 type Logger interface {
-
 	// Log logs the string with the given level.
 	Log(Level, string) Tracer
 
