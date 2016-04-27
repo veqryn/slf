@@ -36,7 +36,7 @@ func TestLevel_marshal_success(t *testing.T) {
 	if string(res) != `{"level":"PANIC"}` {
 		t.Errorf("unexpected result, %v", string(res))
 	}
-	res, _ = json.Marshal(test{Level: slf.LevelFatal})
+	res, _ = json.Marshal(testLevel{Level: LevelFatal})
 	if string(res) != `{"level":"FATAL"}` {
 		t.Errorf("unexpected result, %v", string(res))
 	}
@@ -75,8 +75,8 @@ func TestLevel_unmarshal_success(t *testing.T) {
 	if err := json.Unmarshal([]byte(`{"level":"panic"}`), &act); err != nil || exp != act {
 		t.Errorf("expected match, %v, %v", err, act)
 	}
-	exp = test{Level: slf.LevelFatal}
-	act = test{}
+	exp = testLevel{Level: LevelFatal}
+	act = testLevel{}
 	if err := json.Unmarshal([]byte(`{"level":"fatal"}`), &act); err != nil || exp != act {
 		t.Errorf("expected match, %v, %v", err, act)
 	}
