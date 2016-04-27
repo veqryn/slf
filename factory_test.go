@@ -1,42 +1,41 @@
 // Copyright (c) 2016 Ventu.io, Oleg Sklyar, contributors
 // The use of this source code is governed by a MIT style license found in the LICENSE file
 
-package slf_test
+package slf
 
 import (
-	"github.com/ventu-io/slf"
 	"testing"
 )
 
-type factory struct {
-	*slf.Noop
+type testFactory struct {
+	*Noop
 	context string
 }
 
-func (log *factory) WithContext(context string) slf.StructuredLogger {
+func (log *testFactory) WithContext(context string) StructuredLogger {
 	log.context = context
 	return log
 }
 
 func TestFactory_define_success(t *testing.T) {
-	slf.Set(&slf.Noop{})
-	if slf.IsSet() {
+	Set(&Noop{})
+	if IsSet() {
 		t.Error("expected undefined")
 	}
-	slf.Set(&factory{&slf.Noop{}, ""})
-	if !slf.IsSet() {
+	Set(&testFactory{&Noop{}, ""})
+	if !IsSet() {
 		t.Error("expected defined")
 	}
-	slf.Set(&slf.Noop{})
-	if slf.IsSet() {
+	Set(&Noop{})
+	if IsSet() {
 		t.Error("expected undefined")
 	}
 }
 
 func TestFactory_withContext_success(t *testing.T) {
-	slf.Set(&factory{&slf.Noop{}, ""})
-	logger := slf.WithContext("test")
-	f, ok := logger.(*factory)
+	Set(&testFactory{&Noop{}, ""})
+	logger := WithContext("test")
+	f, ok := logger.(*testFactory)
 	if !ok {
 		t.Error("expected factory")
 	}
