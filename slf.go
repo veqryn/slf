@@ -45,12 +45,11 @@ type StructuredLogger interface {
 	WithCaller(CallerInfo) StructuredLogger
 
 	// WithError adds an error record to the logger context (only one permitted).
-	WithError(error) Logger
+	WithError(error) StructuredLogger
 }
 
 // Logger represents a generic leveled log interface.
 type Logger interface {
-
 	// Log logs the string with the given level.
 	Log(Level, string) Tracer
 

@@ -33,7 +33,7 @@ func (log *Noop) WithCaller(CallerInfo) StructuredLogger {
 }
 
 // WithError implements the Logger interface.
-func (log *Noop) WithError(error) Logger {
+func (log *Noop) WithError(error) StructuredLogger {
 	return log
 }
 
