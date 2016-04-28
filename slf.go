@@ -50,7 +50,6 @@ type StructuredLogger interface {
 
 // Logger represents a generic leveled log interface.
 type Logger interface {
-
 	// Log logs the string with the given level.
 	Log(Level, string) Tracer
 
@@ -83,6 +82,12 @@ type Logger interface {
 
 	// Panicf formats and logs the string with the corresponding level and panics.
 	Panicf(string, ...interface{})
+
+	// Fatal logs the string with the corresponding level and then calls os.Exit(1).
+	Fatal(string)
+
+	// Fatalf formats and logs the string with the corresponding level and then calls os.Exit(1).
+	Fatalf(string, ...interface{})
 }
 
 // Tracer represents a logger that will trace the execution time since the last log event
