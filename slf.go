@@ -88,6 +88,18 @@ type Logger interface {
 
 	// Fatalf formats and logs the string with the corresponding level and then calls os.Exit(1).
 	Fatalf(string, ...interface{})
+
+	// Print logs the arguments on INFO level. Arguments are handled in the manner of fmt.Print.
+	// This interface allows slf.Logger to be an easy replacement for the builtin *log.Logger
+	Print(v ...interface{})
+
+	// Println logs the arguments on INFO level. Arguments are handled in the manner of fmt.Print.
+	// This interface allows slf.Logger to be an easy replacement for the builtin *log.Logger
+	Println(v ...interface{})
+
+	// Printf logs the arguments on INFO level. Arguments are handled in the manner of fmt.Printf.
+	// This interface allows slf.Logger to be an easy replacement for the builtin *log.Logger
+	Printf(format string, v ...interface{})
 }
 
 // Tracer represents a logger that will trace the execution time since the last log event

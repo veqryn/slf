@@ -106,3 +106,12 @@ func (*Noop) Fatalf(message string, args ...interface{}) {
 // Trace implements the Logger interface.
 func (*Noop) Trace(*error) {
 }
+
+// Print implements the Logger interface.
+func (log *Noop) Print(v ...interface{}) {}
+
+// Printf implements the Logger interface.
+func (log *Noop) Printf(format string, v ...interface{}) {}
+
+// Println implements the Logger interface.
+func (log *Noop) Println(v ...interface{}) {}
